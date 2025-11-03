@@ -1,0 +1,46 @@
+import 'dart:convert';
+
+class Entry {
+  int id;
+  String name;
+  String image;
+  String description;
+  String commonLocations;
+  String category;
+
+  Entry({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.commonLocations,
+    required this.category,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'description': description,
+      'commonLocations': commonLocations,
+      'category': category,
+    };
+  }
+
+  factory Entry.fromMap(Map<String, dynamic> map) {
+    return Entry(
+      id: map['id'],
+      name: map['name'],
+      image: map['image'],
+      description: map['description'],
+      commonLocations: map['commonLocations'],
+      category: map['category'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Entry.fromJson(String source) =>
+      Entry.fromMap(json.decode(source) as Map<String, dynamic>);
+}
