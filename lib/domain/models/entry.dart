@@ -30,13 +30,20 @@ class Entry {
 
   factory Entry.fromMap(Map<String, dynamic> map) {
     return Entry(
-      id: map['id'],
-      name: map['name'],
-      image: map['image'],
-      description: map['description'],
-      commonLocations: map['commonLocations'],
-      category: map['category'],
+      id: map['id'] as int,
+      name: map['name'] as String,
+      image: map['image'] as String,
+      description: map['description'] as String,
+      commonLocations: jsonEncode(map['common_locations']),
+      category: map['category'] as String,
     );
+  }
+
+  // Converte a string em uma lista de strings
+  List<String> commonLocationsConverter() {
+    return (jsonDecode(commonLocations) as List<dynamic>)
+        .map((e) => e as String)
+        .toList();
   }
 
   String toJson() => json.encode(toMap());
