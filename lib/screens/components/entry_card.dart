@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyrule/domain/models/entry.dart';
+import 'package:hyrule/screens/details.dart';
 
 class EntryCard extends StatelessWidget {
   final Entry entry;
@@ -12,7 +13,14 @@ class EntryCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsScreen(entry: entry),
+                ),
+              );
+            },
             child: Ink(
               child: Row(
                 children: <Widget>[

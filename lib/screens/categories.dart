@@ -8,16 +8,17 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Escolha uma categoria'),
-        centerTitle: true,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Escolha uma categoria'),
+          centerTitle: true,
+        ),
+        body: GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
+          children: categories.keys.map((e) => Category(category: e)).toList(),
+        ),
       ),
-      body: GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
-        children: categories.keys.map((e) => Category(category: e)).toList(),
-      ),
-    ));
+    );
   }
 }
