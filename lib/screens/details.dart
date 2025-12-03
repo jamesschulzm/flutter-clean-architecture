@@ -15,12 +15,24 @@ class DetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Detalhes"),
-          centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             daoController.saveEntry(entry: entry);
           },
+        ),
+        body: Column(
+          children: <Widget>[
+            Text(entry.name),
+            Wrap(
+              children: entry
+                  .commonLocationsConverter()
+                  .map((e) => Chip(label: Text(e)))
+                  .toList(),
+            ),
+            Image.network(entry.image),
+            Text(entry.description),
+          ],
         ),
       ),
     );
