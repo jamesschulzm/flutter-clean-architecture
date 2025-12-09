@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hyrule/controllers/api_controller.dart';
 import 'package:hyrule/screens/components/entry_card.dart';
+import 'package:hyrule/screens/favorites.dart';
 import 'package:hyrule/utils/consts/categories.dart';
 
 class Results extends StatelessWidget {
@@ -15,6 +16,17 @@ class Results extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(categories[category]!),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Favorites(),
+                      ));
+                },
+                icon: const Icon(Icons.bookmark)),
+          ],
         ), // AppBar
         body: FutureBuilder(
           future: apiController.getEntriesByCategory(category: category),
@@ -29,8 +41,10 @@ class Results extends StatelessWidget {
               case ConnectionState.done:
                 if (snapshot.hasData) {
                   return ListView.builder(
-                    itemBuilder: (context, index) =>
-                        EntryCard(entry: snapshot.data![index]),
+                    itemBuilder: (context, index) => EntryCard(
+                      entry: snapshot.data![index],
+                      isSaved: false,
+                    ),
                     itemCount: snapshot.data!.length,
                   );
                 }
